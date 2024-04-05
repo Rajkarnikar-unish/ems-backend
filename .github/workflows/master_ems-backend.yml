@@ -52,6 +52,13 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B43DD884864A4DFEA9B6C110684F17E0 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_BBE6A7D863414F8DB7490ABFBCC3633C }}
 
+      - name: Modify application.properties
+        run: |
+          echo "spring.datasource.username=${{ secrets.REMOTE_DB_USER }}" >> ${{ github.workspace }}/target/classes/application.properties
+          echo "spring.datasource.password=${{ secrets.REMOTE_DB_PASSWORD }}" >> ${{ github.workspace }}/target/classes/application.properties
+          echo "unish.app.secret= ${{ secrets.APP_SECRET }}" >> ${{ github.workspace }}/target/classes/application.properties
+          echo "unish.app.jwtExpirationMs= ${{ secrets.APP_TOKEN_EXPIRATION_MS }}" >> ${{ github.workspace }}/target/classes/application.properties
+
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
