@@ -1,5 +1,6 @@
 package org.example.emsbackend.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -31,7 +32,7 @@ public class User{
 
     @Size(max=50)
     @NotBlank
-    @Email(message = ">>>>>>>>>>>>>>THIS IS UNISH RAJKARNIKAR EMAIL<<<<<<<<<<<<<<<<<<<")
+    @Email
     @Column(name = "email", nullable = false)
     private String email;
 
@@ -46,6 +47,7 @@ public class User{
     @NotBlank
     @Size(min = 6, max=120)
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
