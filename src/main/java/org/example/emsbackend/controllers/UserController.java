@@ -17,7 +17,9 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    UserServiceImpl userService = new UserServiceImpl();
+    @Autowired
+    UserServiceImpl userService;
+//    UserServiceImpl userService = new UserServiceImpl();
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
